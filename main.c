@@ -4,6 +4,6 @@ int main() {
 	int a;
     printf("Hello, World!\n");
     printf("\n");
-    printf("YUAN DUS SANTOS AVEIRO");
+    printf("NO COTILLEES EL CODIGO, RATA SUCIA");
     return 0;
 }
