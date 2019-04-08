@@ -81,13 +81,7 @@ long int tamanyoCarpeta(char *directorio, const int root) {
 
     while ((dp = readdir(dir)) != NULL) {
         if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0) {
-            for (i=0; i<root; i++) {
-                if (i%2 == 0 || i == 0) {
-                } else {
-                    tamanyo += tamanyoArchivo(dp->d_name);
-                }
-            }
-
+            tamanyo += tamanyoArchivo(dp->d_name);
             strcpy(path, directorio);
             strcat(path, "/");
             strcat(path, dp->d_name);
@@ -119,5 +113,7 @@ void borrarCarpeta(char *directorio, const int root) {
             borrarCarpeta(path, root+2);
         }
     }
+    rmdir(directorio);
+
     closedir(dir);
 }
