@@ -11,35 +11,6 @@
 #define ELEMENTOS_POR_BLOQUE 20
 #define TAM_MAX_EXT 20
 
-/*
-int main() {
-    char** n = (char**)malloc(10*sizeof(char*));
-    for (int i = 0; i < 10; i++) {
-        n[i] = (char*)malloc(10*sizeof(char));
-    }
-
-    n[0] = "queso.java";
-    n[1] = "queso.png";
-    n[2] = "queso.avi";
-    n[3] = "queso.mp3";
-    n[4] = "queso.";
-    n[5] = "queso.jpg";
-    n[6] = "queso.avi";
-    n[7] = "queso.avi";
-    n[8] = "queso.mp4";
-    n[9] = "queso";
-
-    graficoExtensiones(n, 10);
-
-    for(int i = 0; i < 10; i++) {
-        free(n[i]);
-    }
-    free(n);
-
-    return 0;
-}
-*/
-
 /**
  * Muestra un grafico con la evolucion del tamanyo de una carpeta a lo largo
  * de las distintas versiones del repositorio. Las referencias a las carpetas
@@ -64,7 +35,7 @@ void graficoTamanyoCarpeta(char **pathsCarpetas, int len, char* nombreCarpeta) {
             tamanyos[i] = tamanyoCarpeta(pathsCarpetas[i],0);
         }
     }
-    printf("Evolucion del tamanyo de la carpeta%s:\n", nombreCarpeta);
+    printf("Evolucion del tamanyo (en bytes) de la carpeta%s:\n", nombreCarpeta);
     graficoBarras(nombres, tamanyos, len);
     for (int i = 0; i < len; i++) {
         if (nombres && nombres[i])
@@ -104,7 +75,7 @@ void graficoExtensiones(char** nombresArchivos, int len) {
         }
     }
 
-    long int* frecuencias = malloc(extDistintas*sizeof(long int));
+    long int* frecuencias = (long int*) malloc(extDistintas*sizeof(long int));
     for (int i = 0; i < extDistintas; i++) {
         frecuencias[i] = 0;
     }
@@ -119,16 +90,9 @@ void graficoExtensiones(char** nombresArchivos, int len) {
             }
         }
     }
-    for (int i = 0; i < extDistintas; i++) {
-        printf("%s | %i\n", extensiones[i], frecuencias[i]);
-    }
+
     printf("Frecuencias de extensiones en el repositorio:\n");
     graficoBarras(extensiones, frecuencias, extDistintas);
-    free(frecuencias);
-    for(int i = 0; i < extDistintas; i++) {
-        free(extensiones[i]);
-    }
-    free(extensiones);
 }
 
 /**
@@ -165,7 +129,7 @@ void graficoTamanyoArchivos(char **pathsArchivos, int len, char *nombreArchivo) 
             tamanyos[i] = tamanyoArchivo(pathsArchivos[i]);
         }
     }
-    printf("Evolucion del tamanyo del archivo %s:\n", nombreArchivo);
+    printf("Evolucion del tamanyo (en bytes) del archivo %s:\n", nombreArchivo);
     graficoBarras(nombres, tamanyos, len);
     for (int i = 0; i < len; i++) {
         if (nombres && nombres[i])
@@ -239,7 +203,7 @@ void pintarBloqueGraficoBarras(long int *valores, long int max, int inicio, int 
     } else {
         fin = inicio + ELEMENTOS_POR_BLOQUE;
     }
-    printf("Rango del eje vertical: [0-%i]\n", max);
+    printf("Rango del eje vertical: [0-%ld]\n", max);
     printf("-");
     for(int i = inicio; i < fin; i++) {
         printf("---");
