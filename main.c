@@ -1,9 +1,8 @@
 #include <stdio.h>
+#include "manejo_archivos.h"
+#include "graficos.h"
 
 int main() {
-	int a;
-    printf("Hello, World!\n");
-    printf("\n");
-    printf("NO COTILLEES EL CODIGO, RATA SUCIA");
+
     return 0;
 }
