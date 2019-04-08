@@ -68,6 +68,10 @@ void crearCarpeta(char *nombre){
     mkdir(nombre);
 }
 
+/*
+ * @param directorio Base path to traverse directory
+ * @param root     Integer representing indention for current directory
+ */
 long int tamanyoCarpeta(char *directorio, const int root) {
     long int tamanyo = 0;
     int i;
@@ -81,10 +85,10 @@ long int tamanyoCarpeta(char *directorio, const int root) {
 
     while ((dp = readdir(dir)) != NULL) {
         if (strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0) {
-            tamanyo += tamanyoArchivo(dp->d_name);
             strcpy(path, directorio);
             strcat(path, "/");
             strcat(path, dp->d_name);
+            tamanyo += tamanyoArchivo(path);
             tamanyo = tamanyo + tamanyoCarpeta(path, root+2);
         }
     }
@@ -92,6 +96,10 @@ long int tamanyoCarpeta(char *directorio, const int root) {
     return tamanyo;
 }
 
+/*
+ * @param directorio Base path to traverse directory
+ * @param root     Integer representing indention for current directory
+ */
 void borrarCarpeta(char *directorio, const int root) {
     int i;
     char path[1000];
